@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 gemini_llm = LLM(
-    model="gemini/gemini-2.0-flash",
+    model="gemini/gemini-1.5-pro",
 )
 
 page_scanner = Agent(

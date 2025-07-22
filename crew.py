@@ -13,10 +13,11 @@ crew = Crew(
 )
 
 test_urls = {
-    "1": "https://example.com",
+    "1": "https://www.google.com",
     "2": "https://httpbin.org/forms/post", 
     "3": "https://www.w3schools.com/html/html_forms.asp",
-    "4": "https://github.com/login"
+    "4": "https://github.com/login",
+    "5": "https://demoqa.com/automation-practice-form",
 }
 
 def main():
@@ -26,13 +27,13 @@ def main():
 
     for key, url in test_urls.items():
         print(f"{key}. {url}")
-    print("5. Enter custom URL")
+    print("6. Enter custom URL")
     
-    choice = input("\nEnter choice (1-5): ")
+    choice = input("\nEnter choice (1-6): ")
     
     if choice in test_urls:
         target_url = test_urls[choice]
-    elif choice == "5":
+    elif choice == "6":
         target_url = input("Enter URL: ")
     else:
         target_url = test_urls["1"]

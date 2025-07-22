@@ -1,4 +1,4 @@
-from crewai_tools import tool
+from crewai.tools import tool   
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -8,6 +8,9 @@ from urllib.parse import urljoin, urlparse
 
 @tool("Web Page Scraper")
 def scraper_tool(url: str) -> str:
+    """
+    Scrape a web page and return its structure.
+    """
     try:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -36,8 +39,11 @@ def scraper_tool(url: str) -> str:
     except Exception as e:
         return f"Error scraping {url}: {str(e)}"
     
-@tool("File Storer")
+@tool("File Tool")
 def file_tool(action: str, filename: str = "", content: str = "") -> str:
+    """
+    Manage file operations for snapshot storage.
+    """
     try:
         snapshot_dir = "snapshots"
         os.makedirs(snapshot_dir, exist_ok=True)
