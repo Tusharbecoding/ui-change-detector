@@ -36,3 +36,31 @@ def scraper_tool(url: str) -> str:
     except Exception as e:
         return f"Error scraping {url}: {str(e)}"
     
+@tool("File Storer")
+def file_tool(action: str, filename: str = "", content: str = "") -> str:
+    try:
+        snapshot_dir = "snapshots"
+        os.makedirs(snapshot_dir, exist_ok=True)
+
+        if action == "save":
+            filepath = os.path.join(snapshot_dir, filename)
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            return f"Saved snapshot to {filepath}"
+        
+        elif action == "load":
+            filepath = os.path.join(snapshot_dir, filename)
+            if os.path.exists(filepath):
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    return f.read()
+                
+            return f"File {filename} not found"
+        
+        elif action == "list":
+            files = os.listdir(snapshot_dir) if os.path.exists(snapshot_dir) else []
+            return f"Available snapshots: {', '.join(files)}"
+        
+        return "Invalid action. Use 'save', 'load', or 'list'"
+    
+    except Exception as e:
+        return f"File operation error: {str(e)}"
